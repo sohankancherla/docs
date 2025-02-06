@@ -1,0 +1,47 @@
+---
+title: 'Hooks'
+description: 'Hooks are functions that let you modify React state and lifecycle features.'
+icon: 'react'
+---
+
+## Using Hooks
+<Info>You can only call Hooks at the top of your components</Info>
+### Sharing Data Between Components
+Each component that uses a hook has its own state. If you want to share data between components, you can use a hook to store the data in a parent component and pass it down to the child components.
+```jsx
+export default function MyApp() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <h1>Counters that update together</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
+  );
+}
+```
+
+## useState
+Use `useState` to remember some information that may change over time.
+```jsx {4, 7}
+import { useState } from 'react';
+
+function MyButton() {
+  const [count, setCount] = useState<number>(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+```

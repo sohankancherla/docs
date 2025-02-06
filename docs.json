@@ -16,7 +16,8 @@
           {
             "group": "React",
             "pages": [
-              "frontend/react/basics"
+              "frontend/react/basics",
+              "frontend/react/hooks"
             ]
           }
         ]
