@@ -1,0 +1,105 @@
+---
+title: 'Basics'
+description: 'Basics of React'
+icon: 'react'
+---
+
+## Components
+Components are reusable JSX code that can be used to build a UI.
+<Info>React component names must always start with a capital letter, while HTML tags must be lowercase</Info>
+```jsx {1-5, 11}
+function MyButton() {
+  return (
+    <button>I'm a button</button>
+  );
+}
+
+export default function MyApp() {
+  return (
+    <div>
+      <h1>Welcome to my app</h1>
+      <MyButton />
+    </div>
+  );
+}
+```
+
+## Displaying Data
+Use curly braces `{}` to display data in JSX.
+```jsx {7}
+const user = {
+  name: 'John'
+};
+
+return (
+  <h1>
+    {user.name}
+  </h1>
+);
+```
+
+## Conditional Rendering
+Use `if` statements or logical operators to conditionally render components.
+### If Statement
+```jsx {2-6}
+let content;
+if (isLoggedIn) {
+  content = <AdminPanel />;
+} else {
+  content = <LoginForm />;
+}
+
+return (
+  <div>
+    {content}
+  </div>
+);
+```
+### Logical Operators
+```jsx {3-6}
+return (
+  <div>
+    {isLoggedIn ? <AdminPanel /> : <LoginForm />} // Ternary Operator
+    {isLoggedIn && <LogoutButton />} // Logical AND
+    {user.name || "Anonymous"} // Logical OR
+    {price ?? "Cart is empty"} // Logical OR with nullish coalescing (preserves zero and empty strings)
+  </div>
+);
+```
+
+## Rendering Lists
+Use the `map()` function to render a list of items.
+<Warning>Remeber to add a key for each item in a list. The key should be a unique string or number such as a database ID.</Warning>
+
+```jsx {9-11}
+const users = [
+    {id: 1, name: 'John'},
+    {id: 2, name: 'Jane'},
+    {id: 3, name: 'Doe'}
+]
+
+return (
+  <ul>
+    {users.map((user) => (
+      <li key={user.id}>{user.name}</li>
+    ))}
+  </ul>
+);
+```
+
+## Event Handlers
+You can respond to events by declaring event handler functions inside your components.
+<Info>You do not need to call the event handler function, just pass it down to the event handler attribute</Info>
+```jsx {2-4, 7}
+function MyButton() {
+  function handleClick() {
+    alert('You clicked me!');
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Click me
+    </button>
+  );
+}
+```
