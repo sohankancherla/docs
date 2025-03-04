@@ -4,20 +4,12 @@ description: 'The building blocks of React'
 icon: 'react'
 ---
 
-## [Components](https://sohan.mintlify.app/frontend/react/basics#components)
+## [Components](https://react.dev/learn/your-first-component)
 
 Components are reusable JSX code that can be used to build a UI.
 
 <CodeGroup>
-  ```tsx {1-5, 11} button.tsx
-  export function MyButton() {
-    return (
-      <button>I'm a button</button>
-    );
-  }
-  ```
-
-  ```tsx {1-5, 11} App.tsx
+  ```tsx {1, 7} App.tsx
   import { MyButton } from "./button.tsx";
 
   export default function MyApp() {
@@ -26,6 +18,14 @@ Components are reusable JSX code that can be used to build a UI.
         <h1>Welcome to my app</h1>
           <MyButton />
       </div>
+    );
+  }
+  ```
+  
+  ```tsx button.tsx
+  export function MyButton() {
+    return (
+      <button>I'm a button</button>
     );
   }
   ```
