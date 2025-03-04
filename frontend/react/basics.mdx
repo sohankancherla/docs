@@ -7,7 +7,6 @@ icon: 'react'
 ## Components
 
 Components are reusable JSX code that can be used to build a UI.
-<Info />
 
 ```jsx {1-5, 11}
 function MyButton() {
@@ -79,7 +78,7 @@ return (
 ## Rendering Lists
 
 Use the `map()` function to render a list of items.
-<Warning />
+<Warning>When rendering a list, always include a unique `key` prop usually the `id` of the item. Do not use the index of the item as the key unless the list will never change between renders.</Warning>
 
 ```jsx {9-11}
 const users = [
@@ -100,7 +99,6 @@ return (
 ## Event Handlers
 
 You can respond to events by declaring event handler functions inside your components.
-<Info />
 
 ```jsx {2-4, 7}
 function MyButton() {
@@ -137,7 +135,7 @@ export default function Profile() {
 
 Destructure the props to use them in your component. Remember to use Typescript to keep your code type safe.
 
-```jsx {4,5}
+```jsx {9}
 interface AvatarProps {
     person: {
         name: string;
@@ -146,7 +144,56 @@ interface AvatarProps {
     size?: number;
   }
 
-export default function Avatar({ person, size = 100 }) {
+export default function Avatar({ person, size = 100 }: AvatarProps) {
   // ...
+}
+```
+
+### Forwarding Props
+
+You can forward props to a child component using the `...` spread operator.
+
+```jsx {11}
+interface ProfileProps {
+  person: {
+      name: string;
+      imageId: string;
+  },
+  size?: number;
+}
+
+function Profile(props: ProfileProps) {
+  return (
+    <Avatar {...props} />
+  );
+}
+```
+
+### Children
+
+You can pass children to a component using the `children` prop.
+
+```jsx {5, 8}
+interface CardProps {
+    children: ReactNode;
+}
+
+function Card({ children }: CardProps) {
+  return (
+    <div className="card">
+      {children}
+    </div>
+  );
+}
+
+export default function Profile() {
+  return (
+    <Card>
+      <Avatar
+        person={{ name: 'Donald Trump', imageId: '1bX5QH6' }}
+        size={100}
+      />
+    </Card>
+  );
 }
 ```
