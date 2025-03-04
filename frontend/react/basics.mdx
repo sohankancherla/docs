@@ -10,13 +10,13 @@ Components are reusable JSX code that can be used to build a UI.
 
 <CodeGroup>
   ```tsx {1, 7} App.tsx
-  import { MyButton } from "./button";
+  import { MyButton } from "./button.tsx";
 
   export default function MyApp() {
     return (
       <div>
         <h1>Welcome to my app</h1>
-          <MyButton />
+        <MyButton />
       </div>
     );
   }
