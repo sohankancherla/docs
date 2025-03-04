@@ -1,29 +1,35 @@
 ---
 title: 'Basics'
-description: 'All the important stuff you need to know about React'
+description: 'The building blocks of React'
 icon: 'react'
 ---
 
-## Components
+## [Components](https://sohan.mintlify.app/frontend/react/basics#components)
 
 Components are reusable JSX code that can be used to build a UI.
 
-```jsx {1-5, 11}
-function MyButton() {
-  return (
-    <button>I'm a button</button>
-  );
-}
+<CodeGroup>
+  ```tsx {1-5, 11} button.tsx
+  export function MyButton() {
+    return (
+      <button>I'm a button</button>
+    );
+  }
+  ```
 
-export default function MyApp() {
-  return (
-    <div>
-      <h1>Welcome to my app</h1>
-      <MyButton />
-    </div>
-  );
-}
-```
+  ```tsx {1-5, 11} App.tsx
+  import { MyButton } from "./button.tsx";
+
+  export default function MyApp() {
+    return (
+      <div>
+        <h1>Welcome to my app</h1>
+          <MyButton />
+      </div>
+    );
+  }
+  ```
+</CodeGroup>
 
 ## Displaying Data
 
