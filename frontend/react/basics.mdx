@@ -1,8 +1,9 @@
 ---
 title: 'Basics'
-description: 'The building blocks of React'
+description: 'The basic patterns of React'
 icon: 'react'
 ---
+
 
 ## [Imports and Exports](https://react.dev/learn/importing-and-exporting-components)
 
@@ -28,7 +29,6 @@ export function Avatar() {
 ### Importing
 
 Import components, types, functions, or variables using the `import` keyword.
-<Note>When importing, prefer providing the file extension to match how ES Modules are imported.</Note>
 
 ```tsx
 import { Avatar } from "./avatar.tsx";
@@ -41,7 +41,7 @@ import { Avatar as AvatarComponent } from "./avatar.tsx";
 ```
 
 
-## Displaying Data
+## [Displaying Data](https://react.dev/learn/javascript-in-jsx-with-curly-braces)
 
 Use curly braces `{}` to display data in JSX.
 
@@ -58,11 +58,13 @@ return (
 ```
 
 
-## Conditional Rendering
+## [Conditional Rendering](https://react.dev/learn/conditional-rendering)
 
 Use `if` statements or logical operators to conditionally render components.
 
 ### If Statement
+
+<Tip>Prefer conditionally assigning JSX to a variable for clean and easy to maintain code.</Tip>
 
 ```jsx {2-6}
 let content;
@@ -81,6 +83,8 @@ return (
 
 ### Logical Operators
 
+<Warning>Don't put numbers on the left side of `&&`. A common mistake is to write code like `messageCount && <p>New messages</p>` which renders `0` when messageCount is `0`. Instead, make the left side a boolean expression: `messageCount > 0`</Warning>
+
 ```jsx {3-6}
 return (
   <div>
@@ -93,47 +97,55 @@ return (
 ```
 
 
-## Rendering Lists
+## [Rendering Lists](https://react.dev/learn/rendering-lists)
+
+<Warning>When rendering a list with `map()`, always include a unique `key` prop usually the `id` of the item. Do not use the index of the item as the key unless the list will never change between renders.</Warning>
+
+### Map
 
 Use the `map()` function to render a list of items.
-<Warning>When rendering a list, always include a unique `key` prop usually the `id` of the item. Do not use the index of the item as the key unless the list will never change between renders.</Warning>
 
 ```jsx {9-11}
 const users = [
-    {id: 1, name: 'John'},
-    {id: 2, name: 'Jane'},
-    {id: 3, name: 'Doe'}
+  {id: 1, name: 'John'},
+  {id: 2, name: 'Jane'},
+  {id: 3, name: 'Doe'}
 ]
 
 return (
   <ul>
-    {users.map((user) => (
+    {users.map(user => 
       <li key={user.id}>{user.name}</li>
-    ))}
+    )}
   </ul>
 );
 ```
 
-## Event Handlers
+### Filter
 
-You can respond to events by declaring event handler functions inside your components.
+use the `filter()` function to render a list of items that match a condition.
 
-```jsx {2-4, 7}
-function MyButton() {
-  function handleClick() {
-    alert('You clicked me!');
-  }
+```jsx {7-9}
+const users = [
+  {id: 1, name: 'John', isAdmin: true},
+  {id: 2, name: 'Jane', isAdmin: true},
+  {id: 3, name: 'Doe', isAdmin: false}
+]
 
-  return (
-    <button onClick={handleClick}>
-      Click me
-    </button>
-  );
-}
+const admins = users.filter(user => 
+  user.isAdmin
+);
+
+return (
+  <ul>
+    {admins.map(user =>
+      <li key={user.id}>{user.name}</li>
+    )}
+  </ul>
+);
 ```
 
-
-## Props
+## [Props](https://react.dev/learn/passing-props-to-a-component)
 
 ### Passing Props
 
