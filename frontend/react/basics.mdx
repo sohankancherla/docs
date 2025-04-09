@@ -1,7 +1,7 @@
 ---
-title: 'Basics'
-description: 'The basic patterns of React'
-icon: 'react'
+title: "Basics"
+description: "The basic patterns of React"
+icon: "react"
 ---
 
 
@@ -47,7 +47,7 @@ Use curly braces `{}` to display data in JSX.
 
 ```jsx {7}
 const user = {
-  name: 'John'
+  name: "John"
 };
 
 return (
@@ -83,7 +83,7 @@ return (
 
 ### Logical Operators
 
-<Warning>Don't put numbers on the left side of `&&`. A common mistake is to write code like `messageCount && <p>New messages</p>` which renders `0` when messageCount is `0`. Instead, make the left side a boolean expression: `messageCount > 0`</Warning>
+<Warning>Don"t put numbers on the left side of `&&`. A common mistake is to write code like `messageCount && <p>New messages</p>` which renders `0` when messageCount is `0`. Instead, make the left side a boolean expression: `messageCount > 0`</Warning>
 
 ```jsx {3-6}
 return (
@@ -107,9 +107,9 @@ Use the `map()` function to render a list of items.
 
 ```jsx {9-11}
 const users = [
-  {id: 1, name: 'John'},
-  {id: 2, name: 'Jane'},
-  {id: 3, name: 'Doe'}
+  {id: 1, name: "John"},
+  {id: 2, name: "Jane"},
+  {id: 3, name: "Doe"}
 ]
 
 return (
@@ -127,9 +127,9 @@ use the `filter()` function to render a list of items that match a condition.
 
 ```jsx {7-9}
 const users = [
-  {id: 1, name: 'John', isAdmin: true},
-  {id: 2, name: 'Jane', isAdmin: true},
-  {id: 3, name: 'Doe', isAdmin: false}
+  {id: 1, name: "John", isAdmin: true},
+  {id: 2, name: "Jane", isAdmin: true},
+  {id: 3, name: "Doe", isAdmin: false}
 ]
 
 const admins = users.filter(user => 
@@ -156,7 +156,7 @@ You can pass data from a parent component into a child component using props
 export default function Profile() {
   return (
     <Avatar
-      person={{ name: 'Donald Trump', imageId: '1bX5QH6' }}
+      person={{ name: "Donald Trump", imageId: "1bX5QH6" }}
       size={100}
     />
   );
@@ -204,8 +204,8 @@ function Profile(props: ProfileProps) {
 ### Children
 
 You can pass children to a component using the `children` prop.
-
-```jsx {5, 8}
+<CodeGroup>
+```jsx {5, 8} Card.tsx
 interface CardProps {
     children: ReactNode;
 }
@@ -217,19 +217,21 @@ function Card({ children }: CardProps) {
     </div>
   );
 }
+```
 
+```jsx Profile.tsx
 export default function Profile() {
   return (
     <Card>
       <Avatar
-        person={{ name: 'Donald Trump', imageId: '1bX5QH6' }}
+        person={{ name: "Donald Trump", imageId: "1bX5QH6" }}
         size={100}
       />
     </Card>
   );
 }
 ```
-
+</CodeGroup>
 
 ## [Events](https://react.dev/learn/responding-to-events)
 
@@ -242,7 +244,7 @@ Event handlers are functions you define to respond to interactions.
 ```jsx {2-4}
 export default function Button() {
   function handleClick() {
-    alert('You clicked me!');
+    alert("You clicked me!");
   }
 
   return (
@@ -261,7 +263,7 @@ You can prevent the default behavior of the browser using the `e.preventDefault(
 export default function Signup() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); // Prevent the form resetting the page on submit
-    alert('Submitting!');
+    alert("Submitting!");
   }
 
   return (
@@ -280,12 +282,12 @@ You can stop the event from bubbling up to the parent elements using the `e.stop
 ``` jsx {7}
 export default function Chat() {
   function handleChatClick() {
-    alert('You clicked on the chat window!');
+    alert("You clicked on the chat window!");
   }
 
   function handleButtonClick(e: MouseEvent<HTMLButtonElement>) {
     e.stopPropagation(); // Stop the event from bubbling up to the parent onClick
-    alert('You clicked on the button!');
+    alert("You clicked on the button!");
   }
 
   return (
