@@ -145,6 +145,7 @@ return (
 );
 ```
 
+
 ## [Props](https://react.dev/learn/passing-props-to-a-component)
 
 ### Passing Props
@@ -228,3 +229,75 @@ export default function Profile() {
   );
 }
 ```
+
+
+## [Events](https://react.dev/learn/responding-to-events)
+
+### Event Handlers
+
+Event handlers are functions you define to respond to interactions.
+
+<Note>For better code maintainability, prefer starting the function name with `handle`.</Note>
+
+```jsx {2-4}
+export default function Button() {
+  function handleClick() {
+    alert('You clicked me!');
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Click me
+    </button>
+  );
+}
+```
+
+### Prevent Default
+
+You can prevent the default behavior of the browser using the `e.preventDefault()` method.
+
+```jsx {3}
+export default function Signup() {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault(); // Prevent the form resetting the page on submit
+    alert('Submitting!');
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input />
+      <button type="submit">Send</button>
+    </form>
+  );
+}
+```
+
+### Stop Propagation
+
+You can stop the event from bubbling up to the parent elements using the `e.stopPropagation()` method.
+
+``` jsx {7}
+export default function Chat() {
+  function handleChatClick() {
+    alert('You clicked on the chat window!');
+  }
+
+  function handleButtonClick(e: MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation(); // Stop the event from bubbling up to the parent onClick
+    alert('You clicked on the button!');
+  }
+
+  return (
+    <div onClick={handleChatClick}>
+      <button onClick={handleButtonClick}>
+        Send
+      </button>
+    </div>
+  );
+}
+```
+
+
+
+
