@@ -206,8 +206,10 @@ function Profile(props: ProfileProps) {
 You can pass children to a component using the `children` prop.
 <CodeGroup>
 ```jsx {5, 8} Card.tsx
+import { ReactNode } from "react";
+
 type CardProps = {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export function Card({ children }: CardProps) {

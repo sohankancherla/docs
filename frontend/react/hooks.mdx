@@ -13,10 +13,10 @@ icon: "react"
 
 Each component that uses a hook has its own state. If you want to share data between components, you can use a hook to store the data in a parent component and pass it down to the child components.
 
-<Tip> For complex state management, use Context API or a state management library like Zustand or Legend State.</Tip>
+<Tip> For complex state management, use Context API or a state management library like Zustand.</Tip>
 
 ```jsx
-export default function MyApp() {
+function MyApp() {
   const [count, setCount] = useState<number>(0);
 
   function handleClick() {
@@ -74,8 +74,8 @@ function handleClick() {
 
 <Warning>To update an object, replace the object with a new object. If the object is mutated, react is unaware of the change and will not trigger a re-render.</Warning>
 
-```jsx
-export default function Profile() {
+```jsx {8-10}
+function Profile() {
   const [person, setPerson] = useState({
     name: "John",
     age: 30
@@ -157,7 +157,7 @@ function Todos() {
 ```
 
 ```jsx todosReducer.ts
-export default function todosReducer(todos: Todo[], action: Action) {
+export function todosReducer(todos: Todo[], action: Action) {
   switch (action.type) {
     case "added": {
       return [...todos, action.todo];
@@ -180,6 +180,55 @@ export default function todosReducer(todos: Todo[], action: Action) {
       throw Error("Unknown action: " + action.type);
     }
   }
+}
+```
+</CodeGroup>
+
+## [useContext](https://react.dev/reference/react/useContext)
+
+Use `useContext` to share data between components without passing props
+
+<Tip>Use `useMemo` to cache the context value when passing objects. This prevents unnecessary re-renders of all consuming components.</Tip>
+
+<CodeGroup>
+```jsx App.tsx
+import { createContext, useState, useMemo } from 'react';
+
+type ThemeContextType = {
+  theme: 'light' | 'dark' | 'system';
+  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+}
+
+export const ThemeContext = createContext<ThemeContextType>({ theme: 'system', setTheme: () => {} });
+
+function App() {
+  const [theme, setTheme] = useState<ThemeContextType['theme']>('system');
+
+  // Memoize the context value to prevent unnecessary re-renders
+  const value = useMemo(() => ({ theme, setTheme }), [theme]);
+
+  return (
+    <ThemeContext value={theme}>
+      <Settings />
+    </ThemeContext>
+  );
+}
+```
+
+```jsx Settings.tsx {5,10}
+import { useContext } from 'react';
+import { ThemeContext } from './App';
+
+function Settings() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    <div>
+      <h1>Settings</h1>
+      <p>Theme: {theme}</p>
+      <button onClick={() => setTheme('dark')}>Set Dark</button>
+    </div>
+  );
 }
 ```
 </CodeGroup>
