@@ -31,13 +31,13 @@ export function Avatar() {
 Import components, types, functions, or variables using the `import` keyword.
 
 ```tsx
-import { Avatar } from "./avatar.tsx";
+import { Avatar } from "./avatar";
 ```
 
 <Tip>You can rename the imported component using the `as` keyword. This only works with named exports.</Tip>
 
 ```tsx
-import { Avatar as AvatarComponent } from "./avatar.tsx";
+import { Avatar as AvatarComponent } from "./avatar";
 ```
 
 
@@ -153,7 +153,7 @@ return (
 You can pass data from a parent component into a child component using props
 
 ```jsx {4,5}
-export default function Profile() {
+function Profile() {
   return (
     <Avatar
       person={{ name: "Donald Trump", imageId: "1bX5QH6" }}
@@ -168,15 +168,15 @@ export default function Profile() {
 Destructure the props to use them in your component. Remember to use Typescript to keep your code type safe.
 
 ```jsx {9}
-interface AvatarProps {
-    person: {
-        name: string;
-        imageId: string;
-    },
-    size?: number;
-  }
+type AvatarProps = {
+  person: {
+      name: string;
+      imageId: string;
+  },
+  size?: number;
+}
 
-export default function Avatar({ person, size = 100 }: AvatarProps) {
+function Avatar({ person, size = 100 }: AvatarProps) {
   // ...
 }
 ```
@@ -186,7 +186,7 @@ export default function Avatar({ person, size = 100 }: AvatarProps) {
 You can forward props to a child component using the `...` spread operator.
 
 ```jsx {11}
-interface ProfileProps {
+type ProfileProps = {
   person: {
       name: string;
       imageId: string;
@@ -206,11 +206,11 @@ function Profile(props: ProfileProps) {
 You can pass children to a component using the `children` prop.
 <CodeGroup>
 ```jsx {5, 8} Card.tsx
-interface CardProps {
-    children: ReactNode;
+type CardProps = {
+    children: React.ReactNode;
 }
 
-function Card({ children }: CardProps) {
+export function Card({ children }: CardProps) {
   return (
     <div className="card">
       {children}
@@ -220,7 +220,7 @@ function Card({ children }: CardProps) {
 ```
 
 ```jsx Profile.tsx
-export default function Profile() {
+function Profile() {
   return (
     <Card>
       <Avatar
@@ -242,7 +242,7 @@ Event handlers are functions you define to respond to interactions.
 <Note>For better code maintainability, prefer starting the function name with `handle`.</Note>
 
 ```jsx {2-4}
-export default function Button() {
+function Button() {
   function handleClick() {
     alert("You clicked me!");
   }
@@ -260,7 +260,7 @@ export default function Button() {
 You can prevent the default behavior of the browser using the `e.preventDefault()` method.
 
 ```jsx {3}
-export default function Signup() {
+function Signup() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); // Prevent the form resetting the page on submit
     alert("Submitting!");
@@ -280,7 +280,7 @@ export default function Signup() {
 You can stop the event from bubbling up to the parent elements using the `e.stopPropagation()` method.
 
 ``` jsx {7}
-export default function Chat() {
+function Chat() {
   function handleChatClick() {
     alert("You clicked on the chat window!");
   }
