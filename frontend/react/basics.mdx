@@ -132,9 +132,9 @@ const users = [
   {id: 3, name: "Doe", isAdmin: false}
 ]
 
-const admins = users.filter(user => 
+const admins = useMemo(() => users.filter(user => 
   user.isAdmin
-);
+), [users]);
 
 return (
   <ul>
@@ -205,7 +205,7 @@ function Profile(props: ProfileProps) {
 
 You can pass children to a component using the `children` prop.
 <CodeGroup>
-```jsx {5, 8} Card.tsx
+```jsx {7, 10} Card.tsx
 import { ReactNode } from "react";
 
 type CardProps = {
