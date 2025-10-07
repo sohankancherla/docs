@@ -232,3 +232,54 @@ function Settings() {
 }
 ```
 </CodeGroup>
+
+## [useRef](https://react.dev/reference/react/useRef)
+
+Use `useRef` to store a value that persists between renders. Unlike `useState`, `useRef` does not trigger a re-render when the value changes.
+
+<Warning>Only read or write `ref.current` inside effects or event handlers. If you need to read or write outside of these, use `useState`.</Warning>
+
+```jsx {4, 7}
+import { useCallback, useRef } from "react";
+
+function Login() {
+  const failedAttempts = useRef<number>(0);
+
+  const handleLogin = useCallback(() => {
+    failedAttempts.current++;
+    if (failedAttempts.current > 3) {
+      alert("Too many failed attempts");
+    }
+  }, []);
+
+  return (
+    <div>
+      <input type="password" />
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  );
+}
+```
+
+### Manipulate the DOM
+
+A common use case for `useRef` is to manipulate the DOM elements.
+
+```jsx {4, 7}
+import { useCallback, useRef } from "react";
+
+function Input() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleFocus = useCallback(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleFocus}>Focus input</button>
+    </div>
+  );
+}
+```
