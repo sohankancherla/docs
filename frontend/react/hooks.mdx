@@ -204,11 +204,11 @@ export const ThemeContext = createContext<ThemeContextType>({ theme: 'system', s
 function App() {
   const [theme, setTheme] = useState<ThemeContextType['theme']>('system');
 
-  // Memoize the context value to prevent unnecessary re-renders
+  // Memoize the context value to prevent children using context from re-rendering when app re-renders
   const value = useMemo(() => ({ theme, setTheme }), [theme]);
 
   return (
-    <ThemeContext value={theme}>
+    <ThemeContext value={value}>
       <Settings />
     </ThemeContext>
   );
